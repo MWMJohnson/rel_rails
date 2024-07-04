@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   get "/shelters", to: "shelters#index"
-
+  get "/shelters/:id", to: "shelters#show"
 end
