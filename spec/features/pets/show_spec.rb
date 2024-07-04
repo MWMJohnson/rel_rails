@@ -15,16 +15,19 @@ RSpec.describe "pets/show.html.erb", type: :view do
         expect(page).to have_content(@pet1.name)
         expect(page).to have_content("Max")
 
+        expect(page).to have_content(@pet1.id)
+
         expect(page).to have_content(@pet1.special_needs)
         expect(page).to have_content(false)
 
         expect(page).to have_content(@pet1.age)
         expect(page).to have_content(3)
 
-        expect(page).to have_content(@pet1.shelter)
+        expect(page).to have_content(@pet1.shelter.name)
         expect(page).to have_content("Rex's Kennel")
 
         expect(page).to_not have_content(@pet2.name)
+        expect(page).to_not have_content(@pet2.id)
         expect(page).to_not have_content(@pet2.special_needs)
         expect(page).to_not have_content(@pet2.age)
         expect(page).to_not have_content(@pet2.shelter)
