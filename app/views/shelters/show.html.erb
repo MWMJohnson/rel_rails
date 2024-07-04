@@ -1,5 +1,7 @@
 <h1><%= @shelter.name %></h1>
 <h2>Details</h2>
+
+<h3>Number of pets available: <%= @shelter.pets.count %></h3>
 <ul>
   <li>Nonprofit? <%= @shelter.non_profit %></li>
   <li>Rank: <%= @shelter.rank %></li>

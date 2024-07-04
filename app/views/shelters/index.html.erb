@@ -1,6 +1,7 @@
 <h1>"Shelters"</h1>
-<ul>
-  <% @shelters.each do |shelter| %>
+<% @shelters.each do |shelter| %>
+  <ul>
     <li><%= "#{shelter.name} " %></li>
-  <% end %>
-</ul>
+    <li>Created on: <%= "#{shelter.created_at}" %></li>
+  </ul>
+<% end %>
