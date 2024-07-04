@@ -17,6 +17,8 @@ RSpec.describe "pets/index.html.erb", type: :view do
         expect(page).to have_content(@pet1.name)
         expect(page).to have_content("Max")
 
+        expect(page).to have_content(@pet1.id)
+
         expect(page).to have_content(@pet1.special_needs)
         expect(page).to have_content(false)
 
@@ -28,6 +30,8 @@ RSpec.describe "pets/index.html.erb", type: :view do
 
         expect(page).to have_content(@pet2.name)
         expect(page).to have_content("Sam")
+
+        expect(page).to have_content(@pet2.id)
 
         expect(page).to have_content(@pet2.special_needs)
         expect(page).to have_content(true)
