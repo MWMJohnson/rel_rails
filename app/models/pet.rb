@@ -1,3 +1,3 @@
-class Pet << ApplicationRecord
+class Pet < ApplicationRecord
   belongs_to :shelter
 end
