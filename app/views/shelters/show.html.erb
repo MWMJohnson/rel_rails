@@ -1,6 +1,8 @@
 <h1><%= @shelter.name %></h1>
-<h2>Details</h2>
-
+<div style="display">
+  <%= link_to "Pets available at this shelter", "/shelters/#{@shelter.id}/pets" %>
+</div>
+  <h2>Details</h2>
 <h3>Number of pets available: <%= @shelter.pets.count %></h3>
 <ul>
   <li>Nonprofit? <%= @shelter.non_profit %></li>
