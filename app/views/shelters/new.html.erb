@@ -1,0 +1,20 @@
+<%= form_with model: @shelter, class: "new_shelter_form", data: { turbo: false } do |f| %>
+  <div>
+    <%= f.label :name, "Name:" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :non_profit, "Nonprofit?:" %>
+    <%= f.check_box :non_profit %>
+  </div>
+
+  <div>
+    <%= f.label :rank, "Rank:" %>
+    <%= f.number_field :rank %>
+  </div>
+
+  <div>
+    <%= f.submit "Create Shelter" %>
+  </div>
+<% end %>
