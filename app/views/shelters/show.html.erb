@@ -8,3 +8,7 @@
   <li>Nonprofit? <%= @shelter.non_profit %></li>
   <li>Rank: <%= @shelter.rank %></li>
 </ul>
+
+<div class="edit_shelter">
+  <%= link_to "Edit Shelter", "/shelters/#{@shelter.id}/edit" %>
+</div>
