@@ -24,8 +24,8 @@ RSpec.describe "pets/index.html.erb", type: :view do
       
         expect(page).to have_current_path("/shelters/#{@shelter1.id}")
       
-        expect(page).to have_content "Name: New Shelter Name"
-        expect(page).to have_content "Nonprofit?: false"
+        expect(page).to have_content "New Shelter Name"
+        expect(page).to have_content "Nonprofit? false"
         expect(page).to have_content "Rank: 1020"
       
         @shelter1.reload
