@@ -36,15 +36,14 @@ RSpec.describe "shelters/index.html.erb", type: :view do
         expect(@shelter2.name).to appear_before @shelter1.name
         expect(page).to have_content(@shelter1.created_at)
       end
+      
       it "has a button that links to the new shelter form" do 
         visit shelters_path
         within ".new_shelter" do 
           click_on "Create a New Shelter"
         end
-
         expect(page).to have_current_path "/shelters/new"
       end
     end
   end
-  
 end
