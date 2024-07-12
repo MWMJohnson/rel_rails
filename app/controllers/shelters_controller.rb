@@ -25,7 +25,12 @@ class SheltersController < ApplicationController
   end
 
   def update
-    # require 'pry'; binding.pry
+    @shelter = Shelter.find_by(id: params[:id])
+    if @shelter.update!(shelter_params)
+      redirect_to "/shelters/#{@shelter.id}"
+    else
+      render :edit
+    end
   end
 
 
