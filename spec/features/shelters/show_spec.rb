@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "shelters/show.html.erb", type: :view do
   describe 'user visits show page' do 
     context 'happy path' do
-      it "lets the user view a selected shelter's pets" do
+      it "lets the user view a selected shelter" do
         @shelter1 = Shelter.create!(name: "Rex's Kennel", non_profit: true, rank: 15)
         @shelter2 = Shelter.create!(name: "VCA", non_profit: false, rank: 29)
         
@@ -79,6 +79,17 @@ RSpec.describe "shelters/show.html.erb", type: :view do
         expect(page).to_not have_content(@pet1.special_needs)
         expect(page).to_not have_content(@pet1.age)
         expect(page).to_not have_content(@pet1.shelter.name)
+      end
+
+      it "has a button that links to the edit shelter form" do 
+        @shelter1 = Shelter.create!(name: "Rex's Kennel", non_profit: true, rank: 15)
+        
+        visit "/shelters/#{@shelter1.id}"
+        within ".edit_shelter" do 
+          click_on "Edit Shelter"
+        end
+        
+        expect(page).to have_current_path "/shelters/#{@shelter1.id}/edit"
       end
     end
   end
