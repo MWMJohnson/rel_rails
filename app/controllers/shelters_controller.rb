@@ -18,7 +18,19 @@ class SheltersController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-    # require 'pry'; binding.pry
+  end
+
+  def edit
+    @shelter = Shelter.find_by(id: params[:id])
+  end
+
+  def update
+    @shelter = Shelter.find_by(id: params[:id])
+    if @shelter.update!(shelter_params)
+      redirect_to "/shelters/#{@shelter.id}"
+    else
+      render :edit
+    end
   end
 
 
