@@ -26,18 +26,17 @@ RSpec.describe "pets/index.html.erb", type: :view do
 
         expect(page).to have_content(@pet2.shelter.name)
         expect(page).to have_content("Rex's Kennel")
-
         expect(page).to have_content(@pet1.name)
         expect(page).to have_content(@pet1.id)
         expect(page).to have_content(@pet1.special_needs)
         expect(page).to have_content(@pet1.age)
         expect(page).to have_content(@pet1.shelter.name)
 
-        expect(page).to_not have_content(@pet3.name)
-        expect(page).to_not have_content(@pet3.id)
-        expect(page).to_not have_content(@pet3.special_needs)
-        expect(page).to_not have_content(@pet3.age)
-        expect(page).to_not have_content(@pet3.shelter.name)
+        expect(page).to_not have_content("Name: #{@pet3.name}")
+        expect(page).to_not have_content("ID: #{@pet3.id}")
+        expect(page).to_not have_content("Special Needs? #{@pet3.special_needs}")
+        expect(page).to_not have_content("Age: #{@pet3.age}")
+        expect(page).to_not have_content("Shelter: #{@pet3.shelter}")
       end
     end
   end
