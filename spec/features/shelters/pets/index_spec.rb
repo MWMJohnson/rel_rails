@@ -38,6 +38,15 @@ RSpec.describe "pets/index.html.erb", type: :view do
         expect(page).to_not have_content("Age: #{@pet3.age}")
         expect(page).to_not have_content("Shelter: #{@pet3.shelter}")
       end
+
+      it "redirects to a form to create a new pet under a shelter" do
+        @shelter1 = Shelter.create!(name: "Rex's Kennel", non_profit: true, rank: 15)
+
+        visit "/shelters/#{@shelter1.id}/pets"
+
+        click_on "Create Pet"
+        expect(page).to have_current_path "/shelters/#{@shelter1.id}/pets/new"
+      end
     end
   end
 end
