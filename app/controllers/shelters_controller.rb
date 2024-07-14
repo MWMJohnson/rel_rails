@@ -3,14 +3,10 @@ class SheltersController < ApplicationController
     @shelters = Shelter.order(created_at: :desc)
   end
 
-  def show
-    @shelter = Shelter.find_by(id: params[:id])
-  end
-
   def new
     @shelter = Shelter.new
   end
-
+  
   def create
     shelter = Shelter.new(shelter_params)
     if shelter.save
@@ -18,6 +14,10 @@ class SheltersController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def show
+    @shelter = Shelter.find_by(id: params[:id])
   end
 
   def edit
@@ -32,7 +32,6 @@ class SheltersController < ApplicationController
       render :edit
     end
   end
-
 
   private
 

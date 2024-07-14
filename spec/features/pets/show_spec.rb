@@ -34,4 +34,19 @@ RSpec.describe "pets/show.html.erb", type: :view do
       end
     end
   end
+
+  describe "allows a user access to edit an existing pet" do
+    context 'happy path' do
+      it "updates the pet's attributes based on the user input" do
+        @shelter1 = Shelter.create!(name: "Rex's Kennel", non_profit: true, rank: 15)
+        @pet1 = @shelter1.pets.create!(name:"Max", special_needs: false, age: 3)
+
+        visit "/pets/#{@pet1.id}"
+
+        click_on "Update Pet"
+
+        expect(page).to have_current_path("/pets/#{@pet1.id}/edit")
+      end
+    end
+  end
 end

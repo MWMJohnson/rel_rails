@@ -1,0 +1,21 @@
+<%= form_with model: @pet, url: "/pets/#{@pet.id}", method: :patch, class: "edit_pets_form", data: { turbo: false } do |f| %>
+
+  <div>
+    <%= f.label :name, "Name:" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div>
+    <%= f.label :special_needs, "Special Needs?:" %>
+    <%= f.check_box :special_needs %>
+  </div>
+
+  <div>
+    <%= f.label :age, "Age:" %>
+    <%= f.number_field :age %>
+  </div>
+
+  <div>
+    <%= f.submit "Update Pet" %>
+  </div>
+<% end %>
