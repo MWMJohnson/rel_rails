@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "pets/index.html.erb", type: :view do
+RSpec.describe "shelters/index.html.erb", type: :view do
   describe "allows a user to create a new shelter" do
     context 'happy path' do
       it "creates a new shelter in the database and redirects to the shelters index page" do 

@@ -1,4 +1,10 @@
-<h1>"Pets"</h1>
+<% if @shelter %>
+  <h1><%= "#{@shelter.name}'s Pets" %></h1>
+  <%= link_to "Create Pet", "/shelters/#{@shelter.id}/pets/new" %>
+<% else %>
+  <h1>All Pets</h1>
+<% end %>
+
 <% @pets.each do |pet| %>
   <ul>
     <li>Name: <%= pet.name %></li>
