@@ -4,7 +4,7 @@ class PetsController < ApplicationController
       @shelter = Shelter.find_by(id: params[:id])
       @pets = @shelter.pets
     else
-      @pets = Pet.all
+      @pets = Pet.needy_pets
     end
   end
 
