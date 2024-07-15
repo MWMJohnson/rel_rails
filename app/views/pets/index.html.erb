@@ -4,7 +4,6 @@
 <% else %>
   <h1>All Pets</h1>
 <% end %>
-
 <div class="pets_list">
   <% @pets.each do |pet| %>
     <ul>
@@ -13,6 +12,6 @@
       <li>Special Needs? <%= pet.special_needs %></li>
       <li>Age: <%= pet.age %></li>
       <li>Shelter: <%= pet.shelter.name %></li>
-      </ul>
+    </ul>
   <% end %>
 </div>
