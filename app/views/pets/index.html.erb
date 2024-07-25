@@ -1,6 +1,7 @@
 <% if @shelter %>
   <h1><%= "#{@shelter.name}'s Pets" %></h1>
   <%= link_to "Create Pet", "/shelters/#{@shelter.id}/pets/new" %>
+  <%= link_to "Sort by Name", shelter_pets_path(@shelter, sort: true) %>
 <% else %>
   <h1>All Pets</h1>
 <% end %>
