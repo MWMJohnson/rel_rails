@@ -39,19 +39,31 @@ RSpec.describe "pets/index.html.erb", type: :view do
         expect(page).to_not have_content("Shelter: #{@pet3.shelter}")
       end
 
-      it "sorts the shelter's pet by name alphabeticallly" do
-        @shelter1 = Shelter.create!(name: "Rex's Kennel", non_profit: true, rank: 15)
-        @pet1 = @shelter1.pets.create!(name:"Max", special_needs: false, age: 3)
-        @pet2 = @shelter1.pets.create!(name:"Sam", special_needs: true, age: 12)
-        @pet3 = @shelter1.pets.create!(name:"Freddy", special_needs: true, age: 15)
-        @pet4 = @shelter1.pets.create!(name:"Bill", special_needs: false, age: 2)
+      describe "Sort by Name link" do
+        it "sorts the shelter's pet by name alphabeticallly" do
+          @shelter1 = Shelter.create!(name: "Rex's Kennel", non_profit: true, rank: 15)
+          @pet1 = @shelter1.pets.create!(name:"Max", special_needs: false, age: 3)
+          @pet2 = @shelter1.pets.create!(name:"Sam", special_needs: true, age: 12)
+          @pet3 = @shelter1.pets.create!(name:"Freddy", special_needs: true, age: 15)
+          @pet4 = @shelter1.pets.create!(name:"Bill", special_needs: false, age: 2)
 
-        visit "shelters/#{@shelter1.id}/pets"
+          visit "shelters/#{@shelter1.id}/pets"
 
-        within ".pets_list" do 
-          expect("Name: Bill").to appear_before("Name: Freddy")
-          expect("Name: Freddy").to appear_before("Name: Max")
-          expect("Name: Max").to appear_before("Name: Sam")
+          within ".pets_list" do 
+            expect("Name: Max").to appear_before("Name: Sam")
+            expect("Name: Sam").to appear_before("Name: Freddy")
+            expect("Name: Freddy").to appear_before("Name: Bill")
+          end
+
+          click_on "Sort by Name"
+
+          expect(page).to have_current_path("/shelters/#{@shelter1.id}/pets?sort=true")
+
+          within ".pets_list" do 
+            expect("Name: Bill").to appear_before("Name: Freddy")
+            expect("Name: Freddy").to appear_before("Name: Max")
+            expect("Name: Max").to appear_before("Name: Sam")
+          end
         end
       end
 
