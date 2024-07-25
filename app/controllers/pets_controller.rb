@@ -3,6 +3,9 @@ class PetsController < ApplicationController
     if params[:id]
       @shelter = Shelter.find_by(id: params[:id])
       @pets = @shelter.pets
+      if params[:sort]
+        @pets = @pets.alphabetize
+      end
     else
       @pets = Pet.needy_pets
     end
