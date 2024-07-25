@@ -4,4 +4,8 @@ class Pet < ApplicationRecord
   def self.needy_pets
     where(special_needs: true)
   end
+
+  def self.alphabetize
+    order(:name)
+  end
 end
