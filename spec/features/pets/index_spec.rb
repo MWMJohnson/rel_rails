@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "/pets/index.html.erb", type: :view do
+RSpec.describe "/pets", type: :view do
   describe 'user visits pet index page' do 
     context 'happy path' do
       it "lets the user see a list of pets with their attributes" do
