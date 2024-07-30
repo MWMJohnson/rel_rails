@@ -13,6 +13,7 @@
       <li>Special Needs? <%= pet.special_needs %></li>
       <li>Age: <%= pet.age %></li>
       <li>Shelter: <%= pet.shelter.name %></li>
+      <li><%= link_to "Update Pet: #{pet.name}", "/pets/#{pet.id}/edit" %></li>
     </ul>
   <% end %>
 </div>
