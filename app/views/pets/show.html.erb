@@ -10,3 +10,7 @@
 <div class="edit_pet">
   <%= link_to "Update Pet", "/pets/#{@pet.id}/edit" %>
 </div>
+
+<div class="delete_pet">
+  <%= link_to "Delete Pet", "/pets/#{@pet.id}", method: :delete %>
+</div>
