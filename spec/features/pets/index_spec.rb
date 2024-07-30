@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "/pets/index.html.erb", type: :view do
+RSpec.describe "/pets", type: :view do
   describe 'user visits pet index page' do 
     context 'happy path' do
       it "lets the user see a list of pets with their attributes" do
@@ -66,6 +66,32 @@ RSpec.describe "/pets/index.html.erb", type: :view do
           expect(page).to_not have_content("Name: #{@pet3.name}")
           expect(page).to_not have_content("Name: #{@pet5.name}")
         end
+      end
+
+      it "allows a user to edit each pet listed" do
+        @shelter1 = Shelter.create!(name: "Rex's Kennel", non_profit: true, rank: 15)
+        @pet1 = @shelter1.pets.create!(name:"Max", special_needs: true, age: 3)
+        @pet2 = @shelter1.pets.create!(name:"Sam", special_needs: true, age: 12)
+        @pet3 = @shelter1.pets.create!(name:"Freddy", special_needs: true, age: 15)
+
+        visit "/pets"
+
+        within ".pets_list" do
+          click_on "Update Pet: #{@pet1.name}"
+        end
+        expect(page).to have_current_path "/pets/#{@pet1.id}/edit"
+        
+        visit "/pets"
+        within ".pets_list" do 
+        click_on "Update Pet: #{@pet3.name}"
+        end
+        expect(page).to have_current_path "/pets/#{@pet3.id}/edit"
+
+        visit "/pets"
+        within ".pets_list" do
+          click_on "Update Pet: #{@pet2.name}"
+        end
+        expect(page).to have_current_path "/pets/#{@pet2.id}/edit"
       end
     end
   end
