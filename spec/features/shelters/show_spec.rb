@@ -91,7 +91,33 @@ RSpec.describe "shelters/show.html.erb", type: :view do
         
         expect(page).to have_current_path "/shelters/#{@shelter1.id}/edit"
       end
+
+      describe "allows a user access to delete an existing shelter" do
+        it "deletes the shelter and all of its pets" do
+          @shelter1 = Shelter.create!(name: "Rex's Kennel", non_profit: true, rank: 15)
+          @pet1 = @shelter1.pets.create!(name:"Max", special_needs: false, age: 3)
+          @pet2 = @shelter1.pets.create!(name:"Sam", special_needs: true, age: 12)
+          
+          pets = Pet.all
+          expect(pets).to eq([@pet1, @pet2])
+          expect(@pet1.shelter).to eq(@shelter1)
+          expect(@pet2.shelter).to eq(@shelter1)
+
+          visit "/shelters/#{@shelter1.id}"
+          click_on "Delete Shelter"
+  
+          expect(page).to have_current_path("/shelters")
+          
+          within ".shelters_list" do
+            expect(page).to_not have_content("#{@shelter1.name}")
+            expect(page).to_not have_content("Created on: #{@shelter1.name}")
+            expect(page).to_not have_link("Update Shelter: #{@shelter1.name}")
+          end
+
+          pets = Pet.all
+          expect(pets).to eq([])
+        end
+      end
     end
   end
-  
 end

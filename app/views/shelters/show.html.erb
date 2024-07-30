@@ -12,3 +12,7 @@
 <div class="edit_shelter">
   <%= link_to "Edit Shelter", "/shelters/#{@shelter.id}/edit" %>
 </div>
+
+<div class="delete_shelter">
+  <%= link_to "Delete Shelter", "/shelters/#{@shelter.id}", method: :delete %>
+</div>

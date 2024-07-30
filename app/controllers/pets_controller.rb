@@ -42,6 +42,16 @@ class PetsController < ApplicationController
     end
   end
 
+  def destroy
+    pet = Pet.find_by(id: params[:id])
+    if pet
+      pet.destroy
+      redirect_to "/pets"
+    else
+      render :show
+    end
+  end
+
   private
 
   def pet_params
