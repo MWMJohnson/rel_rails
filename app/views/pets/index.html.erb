@@ -3,11 +3,15 @@
   <%= link_to "Create Pet", "/shelters/#{@shelter.id}/pets/new" %>
   <%= link_to "Sort by Name", shelter_pets_path(@shelter, sort: true) %>
   <div class="pets_age_filter_input">
-    <form action="/shelters/<%= @shelter.id %>/pets" method="get">
-      <label for="threshold">Enter minimum age:</label>
-      <input type="number" name="threshold" id="threshold">
-      <input type="submit" value="Only return pets older than minimum age">
-    </form>
+    <%= form_with url: shelter_pets_path(@shelter), method: :get, local: true do %>
+      <div>
+        <%= label_tag :threshold, "Enter minimum age:" %>
+        <%= number_field_tag :threshold, params[:threshold], id: "threshold" %>
+      </div>
+      <div>
+        <%= submit_tag "Only return pets older than minimum age", name: nil %>
+      </div>
+    <% end %>
   </div>
 
 <% else %>
