@@ -118,7 +118,7 @@ RSpec.describe "shelters/:id/pets", type: :view do
           expect(page).to have_content(@pet3.name)
         end
 
-        within ".pets_age_filter_input" do 
+        within ".pets_age_filter_input" do
           fill_in "Enter minimum age:", with: 12
           click_on "Only return pets older than minimum age"
         end
