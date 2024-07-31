@@ -1,8 +1,12 @@
 class PetsController < ApplicationController
+
   def index
     if params[:id]
       @shelter = Shelter.find_by(id: params[:id])
       @pets = @shelter.pets
+      if params[:threshold]
+        @pets = @pets.filter_by_age(params[:threshold])
+      end
       if params[:sort]
         @pets = @pets.alphabetize
       end
