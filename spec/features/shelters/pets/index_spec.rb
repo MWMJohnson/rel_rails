@@ -104,6 +104,33 @@ RSpec.describe "shelters/:id/pets", type: :view do
         end
         expect(page).to have_current_path "/pets/#{@pet2.id}/edit"
       end
+
+      it "filters pets to be shown by age inputted by user" do
+        @shelter1 = Shelter.create!(name: "Rex's Kennel", non_profit: true, rank: 15)
+        @pet1 = @shelter1.pets.create!(name:"Max", special_needs: false, age: 3)
+        @pet2 = @shelter1.pets.create!(name:"Sam", special_needs: true, age: 12)
+        @pet3 = @shelter1.pets.create!(name:"Freddy", special_needs: true, age: 15)
+
+        visit "shelters/#{@shelter1.id}/pets"
+        within ".pets_list" do
+          expect(page).to have_content(@pet1.name)
+          expect(page).to have_content(@pet2.name)
+          expect(page).to have_content(@pet3.name)
+        end
+
+        within ".pets_age_filter_input" do
+          fill_in "Enter minimum age:", with: 12
+          click_on "Only return pets older than minimum age"
+        end
+
+        expect(page).to have_current_path("/shelters/#{@shelter1.id}/pets?threshold=12")
+        within (".pets_list") do
+          expect(page).to have_content(@pet3.name)
+
+          expect(page).to_not have_content(@pet1.name)
+          expect(page).to_not have_content(@pet2.name)
+        end
+      end
     end
   end
 end

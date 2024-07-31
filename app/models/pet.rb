@@ -8,4 +8,8 @@ class Pet < ApplicationRecord
   def self.alphabetize
     order(:name)
   end
+
+  def self.filter_by_age(input)
+    where("age > ?", input)
+  end
 end
