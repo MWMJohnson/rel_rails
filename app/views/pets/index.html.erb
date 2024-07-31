@@ -2,6 +2,14 @@
   <h1><%= "#{@shelter.name}'s Pets" %></h1>
   <%= link_to "Create Pet", "/shelters/#{@shelter.id}/pets/new" %>
   <%= link_to "Sort by Name", shelter_pets_path(@shelter, sort: true) %>
+  <div class="pets_age_filter_input">
+    <form action="/shelters/<%= @shelter.id %>/pets" method="get">
+      <label for="threshold">Enter minimum age:</label>
+      <input type="number" name="threshold" id="threshold">
+      <input type="submit" value="Only return pets older than minimum age">
+    </form>
+  </div>
+
 <% else %>
   <h1>All Pets</h1>
 <% end %>
